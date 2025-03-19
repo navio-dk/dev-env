@@ -4,7 +4,7 @@ import vueParser from 'vue-eslint-parser';
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import pluginTs from '@typescript-eslint/eslint-plugin';
-import tailwind from 'eslint-plugin-tailwindcss';
+// import tailwind from 'eslint-plugin-tailwindcss'; // re-add when tailwind v4 is supported
 import eslintPluginVueScopedCSS from 'eslint-plugin-vue-scoped-css';
 import {
 	baseConfig,
@@ -25,7 +25,7 @@ import {
 export default function createConfig(withNuxt, tsProjectRoot) {
 	// First arg is added as last rules to make overwrites easier
 	return withNuxt([
-		...tailwind.configs['flat/recommended'],
+		// ...tailwind.configs['flat/recommended'], // re-add when tailwind v4 is supported
 		
 		...eslintPluginVueScopedCSS.configs['flat/recommended'],
 

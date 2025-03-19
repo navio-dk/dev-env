@@ -254,6 +254,7 @@ This is a limitation of eslint itself.
 export const markdownConfig = {
 	name: 'nomad/markdown',
 	files: [ '**/*.md' ],
+	ignores: [ 'CHANGELOG.md' ],
 	plugins: {
 		markdown
 	},

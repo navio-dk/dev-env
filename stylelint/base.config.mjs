@@ -13,6 +13,12 @@ export default {
 				ignoreAtRules: [
 					'tailwind',
 					'screen',
+					'plugin',
+					'config',
+					'theme',
+					'source',
+					'utility',
+					'variant',
 				]
 			} 
 		],

@@ -6,7 +6,6 @@ export default defineNuxtConfig({
 	// },
 
 	modules: [
-		'@nuxtjs/tailwindcss',
 		'@nuxt/eslint',
 	],
 
@@ -33,13 +32,6 @@ export default defineNuxtConfig({
 	typescript: {
 		// Enables strict mode in the `tsconfig.json` that nuxt generates
 		strict: true,
-	},
-
-	postcss: {
-		plugins: {
-			tailwindcss: {}, // Used by tailwindcss
-			autoprefixer: {}, // Used by tailwindcss
-		},
 	},
 
 	hooks: {
@@ -85,14 +77,6 @@ export default defineNuxtConfig({
 				},
 			},
 		},
-	},
-
-	// Configures @nuxtjs/tailwindcss module
-	tailwindcss: {
-		// Enables `import tailwindConfig from '#tailwind-config'` - see link for tree-shaking info etc: https://tailwindcss.nuxtjs.org/tailwind/config#referencing-in-the-application
-		exposeConfig: true,
-		// https://tailwindcss.nuxtjs.org/tailwind/editor-support
-		editorSupport: true,
 	},
 })
 
