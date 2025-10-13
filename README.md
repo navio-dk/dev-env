@@ -1,4 +1,4 @@
-# Nomad Solutions Development Environment
+# Navio Development Environment
 This repo contains shared development environment configurations for projects.
 
 ## Install
@@ -14,7 +14,7 @@ Add this repository as a development dependency in your `package.json`:
 
 {
 	"devDependencies": {
-		"@nomad-solutions/dev-env": "github:Nomad-Solutions/dev-env#v{version}"
+		"@navio-dk/dev-env": "github:navio-dk/dev-env#v{version}"
 	}
 }
 ```
@@ -25,12 +25,12 @@ Add this repository as a development dependency in your `package.json`:
 
 {
 	"devDependencies": {
-		"@nomad-solutions/dev-env": "github:Nomad-Solutions/dev-env"
+		"@navio-dk/dev-env": "github:navio-dk/dev-env"
 	}
 }
 ```
 
-You can now import and extend (etc) the configurations with `@nomad-solutions/dev-env/{package}`.
+You can now import and extend (etc) the configurations with `@navio-dk/dev-env/{package}`.
 
 ### VSCode
 Add the following content to your `.vscode/extensions.json` and install the extensions:
@@ -79,7 +79,7 @@ Add the file `.vscode/tabaqa.json` to your workspace with the following content:
 // .vscode/tabaqa.json
 
 {
-  "extends": "https://raw.githubusercontent.com/Nomad-Solutions/dev-env/refs/tags/{version}/vscode/base.json",
+  "extends": "https://raw.githubusercontent.com/navio-dk/dev-env/refs/tags/{version}/vscode/base.json",
   "root": true,
   "settings": {
 		// Your custom VSCode settings here
@@ -92,7 +92,7 @@ Add the file `.vscode/tabaqa.json` to your workspace with the following content:
 // .vscode/tabaqa.json
 
 {
-  "extends": "https://raw.githubusercontent.com/Nomad-Solutions/dev-env/refs/heads/main/vscode/base.json",
+  "extends": "https://raw.githubusercontent.com/navio-dk/dev-env/refs/heads/main/vscode/base.json",
   "root": true,
   "settings": {
 		// Your custom VSCode settings here
@@ -121,11 +121,11 @@ Various parts of the development environment need scripts in your `package.json`
 		"version": "commit-and-tag-version"
 	},
 	"devDependencies": {
-		"@nomad-solutions/dev-env": "github:Nomad-Solutions/dev-env#v{version}"
+		"@navio-dk/dev-env": "github:navio-dk/dev-env#v{version}"
 	},
 	// If you don't add this, Bun might ask you to trust the package manually because some dependencies run scripts on installation
 	"trustedDependencies": [
-		"@nomad-solutions/dev-env"
+		"@navio-dk/dev-env"
 	]
 }
 ```
@@ -137,7 +137,7 @@ You can extend this commitlint config by adding the following to your own `commi
 // commitlint.config.mjs
 
 export default { 
-	extends: [ '@nomad-solutions/dev-env/commitlint' ],
+	extends: [ '@navio-dk/dev-env/commitlint' ],
 	rules: {
 		'scope-enum': [
 			2,
@@ -172,7 +172,7 @@ Add the following to your `eslint.config.mjs`:
 // eslint.config.mjs
 
 import tseslint from 'typescript-eslint';
-import base from '@nomad-solutions/dev-env/eslint/typescript';
+import base from '@navio-dk/dev-env/eslint/typescript';
 
 export default tseslint.config(
 	base,
@@ -184,7 +184,7 @@ Add the following to your `eslint.config.mjs`:
 ```javascript
 // eslint.config.mjs
 
-import createConfig from '@nomad-solutions/dev-env/eslint/nuxt'
+import createConfig from '@navio-dk/dev-env/eslint/nuxt'
 import withNuxt from './.nuxt/eslint.config.mjs'
 
 export default createConfig(withNuxt, import.meta.dirname)
@@ -204,7 +204,7 @@ You can extend this config by adding it to your own `stylelint.config.mjs`:
 
 /** @type {import('stylelint').Config} */
 export default {
-	extends: [ '@nomad-solutions/dev-env/stylelint' ],
+	extends: [ '@navio-dk/dev-env/stylelint' ],
 }
 
 ```
@@ -215,8 +215,8 @@ You can extend this lint-staged config by adding the following to your own `lint
 ```javascript
 // lint-staged.config.mjs
 
-import eslintConfig from '@nomad-solutions/dev-env/lint-staged/eslint';
-import createStylelintConfig from '@nomad-solutions/dev-env/lint-staged/stylelint';
+import eslintConfig from '@navio-dk/dev-env/lint-staged/eslint';
+import createStylelintConfig from '@navio-dk/dev-env/lint-staged/stylelint';
 
 export default {
 	...eslintConfig,
@@ -266,7 +266,7 @@ After installation, you can extend this tsconfig by adding the following to your
 // tsconfig.json
 
 {
-	"extends": "@nomad-solutions/dev-env/tsconfig/base"
+	"extends": "@navio-dk/dev-env/tsconfig/base"
 }
 ```
 
@@ -282,7 +282,7 @@ export default defineNuxtConfig({
 		compatibilityVersion: 4,
 	},
 
-	extends: [ '@nomad-solutions/dev-env/nuxt/base' ],
+	extends: [ '@navio-dk/dev-env/nuxt/base' ],
 })
 ```
 
@@ -297,7 +297,7 @@ To extend this configuration, add the following to your `tailwind.config.ts`:
 // tailwind.config.ts
 
 import type { Config } from 'tailwindcss'
-import baseConfig from '@nomad-solutions/dev-env/tailwind/base'
+import baseConfig from '@navio-dk/dev-env/tailwind/base'
 
 export default {
 	presets: [ baseConfig ],
@@ -322,7 +322,7 @@ Afterwards you should set a fitting first version number in your `package.json`,
 // package.json
 
 {
-	"name": "@nomad-solutions/{package}",
+	"name": "@navio-dk/{package}",
 	"version": "0.1.0",
 	// ...
 }
@@ -370,7 +370,7 @@ When developing on this package, it might be beneficial to see how changes inter
 
 **TLDR**:
 1. Execute `bun link` from the root of this repository.
-2. Execute `bun link @nomad-solutions/dev-env` in the root of your application.
+2. Execute `bun link @navio-dk/dev-env` in the root of your application.
 
 This package should now be usable in your application (see [Usage section](#usage)), and updates to this package will be reflected instantly in your application (by the magic of symlinks).
 
@@ -380,7 +380,7 @@ This package should now be usable in your application (see [Usage section](#usag
 
 <!-- eslint-disable-next-line markdown/no-missing-label-refs -- not a ref -->
 > [!TIP]  
-> Remember to execute `bun link @nomad-solutions/dev-env` again if you delete your `node_modules/` or run a `bun install` in the consuming project, since that will unlink this package.
+> Remember to execute `bun link @navio-dk/dev-env` again if you delete your `node_modules/` or run a `bun install` in the consuming project, since that will unlink this package.
 
 ### Adding a configuration
 
@@ -390,7 +390,7 @@ E.g. `./eslint/eslint.config.mjs`.
 #### 2. Add the package's export name in this repo's `package.json`
 <!-- eslint-disable-next-line markdown/no-missing-label-refs -- not a ref -->
 > [!TIP]  
-> The package's export name is the one used when importing the package in the string `@nomad-solutions/dev-env/{package}`.
+> The package's export name is the one used when importing the package in the string `@navio-dk/dev-env/{package}`.
 
 E.g.:
 ```json5

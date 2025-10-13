@@ -1,5 +1,5 @@
 {
-  "name": "@nomad-solutions/dev-env",
+  "name": "@navio-dk/dev-env",
   "version": "3.0.1",
   "type": "module",
   "scripts": {
