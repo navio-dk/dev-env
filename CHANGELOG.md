@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [3.1.1](https://github.com/Nomad-Solutions/dev-env/compare/v3.1.0...v3.1.1) (2025-10-22)
+
 ## [3.1.0](https://github.com/navio-dk/dev-env/compare/v3.0.1...v3.1.0) (2025-10-13)
 
 
