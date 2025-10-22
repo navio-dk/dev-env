@@ -13,7 +13,7 @@ import {
 
 export default tseslint.config(
 	{	
-		name: 'nomad/typescript',
+		name: 'navio/typescript',
 		extends: [
 			eslint.configs.recommended,
 			tseslint.configs.strictTypeChecked,
@@ -41,7 +41,7 @@ export default tseslint.config(
 	},
 
 	{
-		name: 'nomad/disable-type-checked',
+		name: 'navio/disable-type-checked',
 		files: [ '**/*.{js,mjs,cjs,jsx}' ],
 		extends: [ tseslint.configs.disableTypeChecked ],
 	},

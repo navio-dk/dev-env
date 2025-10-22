@@ -71,5 +71,10 @@
 	},
 	"editor.quickSuggestions": {
 		"strings": true
+	},
+
+	"search.exclude": {
+		"**/.nuxt": true,
+		"**/bun.lock": true
 	}
 }

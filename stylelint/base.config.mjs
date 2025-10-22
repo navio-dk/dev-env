@@ -11,8 +11,14 @@ export default {
 			true,
 			{
 				ignoreAtRules: [
-					'tailwind',
-					'screen',
+					'plugin',
+					'config',
+					'theme',
+					'source',
+					'utility',
+					'variant',
+					'reference',
+					'custom-variant'
 				]
 			} 
 		],

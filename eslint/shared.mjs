@@ -6,7 +6,7 @@ import json from '@eslint/json';
 import markdown from '@eslint/markdown';
 
 export const baseConfig = {
-	name: 'nomad/base',
+	name: 'navio/base',
 
 	plugins: {
 		'newline-destructuring': newlineDestructuring,
@@ -46,7 +46,7 @@ export const baseConfig = {
 };
 
 export const stylisticConfig = {
-	name: 'nomad/stylistic',
+	name: 'navio/stylistic',
 
 	plugins: {
 		'@stylistic': stylistic,
@@ -164,7 +164,7 @@ export const stylisticConfig = {
 
 // Add this somewhere after js rules in your config, since it turns off some standard rules
 export const typescriptConfig = {
-	name: 'nomad/typed',
+	name: 'navio/typed',
 
 	rules: {
 		'no-use-before-define': 'off',
@@ -186,7 +186,7 @@ export const typescriptConfig = {
 
 // Add this somewhere after js rules in your config, since it turns off some standard rules
 export const typescriptTypedConfig = {
-	name: 'nomad/typed',
+	name: 'navio/typed',
 
 	rules: {
 		'no-return-await': 'off',
@@ -218,7 +218,7 @@ export const typescriptTypedConfig = {
 
 export const jsonConfigs = [
 	{
-		name: 'nomad/json',
+		name: 'navio/json',
 		language: 'json/json',
 		files: [ '**/*.json' ],
 		ignores: [ 'package-lock.json' ],
@@ -228,7 +228,7 @@ export const jsonConfigs = [
 		...json.configs.recommended,
 	},
 	{
-		name: 'nomad/jsonc',
+		name: 'navio/jsonc',
 		language: 'json/jsonc',
 		files: [ '**/*.jsonc' ],
 		plugins: {
@@ -237,7 +237,7 @@ export const jsonConfigs = [
 		...json.configs.recommended,
 	},
 	{
-		name: 'nomad/json5',
+		name: 'navio/json5',
 		language: 'json/json5',
 		files: [ '**/*.json5' ],
 		plugins: {
@@ -252,8 +252,9 @@ This will lint the actual markdown, but it cannot lint the code blocks within ma
 This is a limitation of eslint itself.
 */
 export const markdownConfig = {
-	name: 'nomad/markdown',
+	name: 'navio/markdown',
 	files: [ '**/*.md' ],
+	ignores: [ 'CHANGELOG.md' ],
 	plugins: {
 		markdown
 	},
@@ -261,7 +262,7 @@ export const markdownConfig = {
 	rules: {
 		'markdown/fenced-code-language': 'error',
 		'markdown/heading-increment': 'error',
-		'markdown/no-duplicate-headings': 'error',
+		'markdown/no-duplicate-headings': 'off',
 		'markdown/no-empty-links': 'error',
 		'markdown/no-html': 'off',
 		'markdown/no-invalid-label-refs': 'error',

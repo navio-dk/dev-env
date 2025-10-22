@@ -104,5 +104,9 @@
 		"tailwindcss",
 		"vue"
 	],
-	"stylelint.packageManager": "pnpm"
+	"stylelint.packageManager": "pnpm",
+	"search.exclude": {
+		"**/.nuxt": true,
+		"**/bun.lock": true
+	}
 }

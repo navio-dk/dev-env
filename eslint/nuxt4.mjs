@@ -4,8 +4,9 @@ import vueParser from 'vue-eslint-parser';
 import eslint from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import pluginTs from '@typescript-eslint/eslint-plugin';
-import tailwind from 'eslint-plugin-tailwindcss';
 import eslintPluginVueScopedCSS from 'eslint-plugin-vue-scoped-css';
+import betterTailwindcss from 'eslint-plugin-better-tailwindcss';
+import { join } from 'node:path';
 import {
 	baseConfig,
 	typescriptConfig,
@@ -25,8 +26,55 @@ import {
 export default function createConfig(withNuxt, tsProjectRoot) {
 	// First arg is added as last rules to make overwrites easier
 	return withNuxt([
-		...tailwind.configs['flat/recommended'],
-		
+		{
+			'settings': {
+				'better-tailwindcss': {
+					// tailwindcss 4: the path to the entry file of the css based tailwind config (consuming project must use this path)
+					'entryPoint': join(tsProjectRoot, 'app/assets/css/main.css'),
+				}
+			}
+		},
+		{
+			name: 'navio/better-tailwindcss',
+			files: [
+				'**/*.js',
+				'**/*.mjs',
+				'**/*.cjs',
+				'**/*.jsx',
+				'**/*.ts',
+				'**/*.tsx',
+				'**/*.mts',
+				'**/*.cts',
+				'**/*.vue',
+				'**/*.css',
+			],
+			plugins: {
+				'better-tailwindcss': betterTailwindcss
+			},
+			rules: {
+				// Stylistic rules (recommended: warn)
+				'better-tailwindcss/enforce-consistent-class-order': 'warn',
+				'better-tailwindcss/enforce-consistent-line-wrapping': 'warn',
+				'better-tailwindcss/no-duplicate-classes': 'warn',
+				'better-tailwindcss/no-unnecessary-whitespace': 'warn',
+
+				// Correctness rules (recommended: error)
+				'better-tailwindcss/no-conflicting-classes': 'error',
+				'better-tailwindcss/no-unregistered-classes': 'off',
+
+				// Additional rules (not in recommended preset)
+				'better-tailwindcss/enforce-consistent-important-position': 'error',
+				'better-tailwindcss/enforce-consistent-variable-syntax': 'error',
+				'better-tailwindcss/enforce-shorthand-classes': 'error',
+				'better-tailwindcss/no-deprecated-classes': 'error',
+				'better-tailwindcss/no-restricted-classes': 'off', // use this in project config to blacklist classes: https://github.com/schoero/eslint-plugin-better-tailwindcss/blob/main/docs/rules/no-restricted-classes.md
+
+				// Deprecated rules
+				// 'better-tailwindcss/multiline': 'off',
+				// 'better-tailwindcss/sort-classes': 'off',
+			}
+		},
+
 		...eslintPluginVueScopedCSS.configs['flat/recommended'],
 
 		...jsonConfigs,

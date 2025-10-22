@@ -179,7 +179,12 @@ export default tseslint.config(
 );
 ```
 
-#### Nuxt
+#### Nuxt 3
+<!-- eslint-disable-next-line markdown/no-missing-label-refs -- not a ref -->
+> [!NOTE]
+> Deprecated for now - PharmaScan has been updated to the Nuxt 4 config
+>
+
 Add the following to your `eslint.config.mjs`:
 ```javascript
 // eslint.config.mjs
@@ -195,6 +200,68 @@ export default createConfig(withNuxt, import.meta.dirname)
 > When using this config, you should not use the above [Typescript config](#typescript)
 
 The remaining configuration is automatically handled when extending the [Nuxt layer](#nuxt-layer) from this package.
+
+### stylelint
+You can extend this config by adding it to your own `stylelint.config.mjs`:
+
+```javascript
+// stylelint.config.mjs
+
+/** @type {import('stylelint').Config} */
+export default {
+	extends: [ '@navio-dk/dev-env/stylelint' ],
+}
+
+```
+
+#### Nuxt 4
+Add the following to your `eslint.config.mjs`:
+```javascript
+// eslint.config.mjs
+
+import createConfig from '@navio-dk/dev-env/eslint/nuxt4'
+import withNuxt from './.nuxt/eslint.config.mjs'
+
+export default createConfig(withNuxt, import.meta.dirname)
+```
+
+And add the following to your `nuxt.config.ts`:
+```typescript
+export default defineNuxtConfig({
+	// ...
+	eslint: {
+		checker: false,
+		config: {
+			stylistic: true,
+			formatters: {
+				css: true,
+				html: true,
+				xml: false,
+				svg: true,
+				markdown: true,
+				prettierOptions: {
+					semi: false,
+					singleQuote: true,
+					trailingComma: 'es5',
+					tabWidth: 2,
+					printWidth: 120,
+					useTabs: true,
+					quoteProps: 'as-needed',
+					jsxSingleQuote: true,
+					bracketSpacing: true,
+					bracketSameLine: false,
+					arrowParens: 'avoid',
+				},
+			},
+		},
+	},
+	// ...
+})
+```
+
+<!-- eslint-disable-next-line markdown/no-missing-label-refs -- not a ref -->
+> [!IMPORTANT]
+> When using this config, you should not use the above [Typescript config](#typescript)
 
 ### stylelint
 You can extend this config by adding it to your own `stylelint.config.mjs`:
@@ -271,6 +338,11 @@ After installation, you can extend this tsconfig by adding the following to your
 ```
 
 ### Nuxt layer
+<!-- eslint-disable-next-line markdown/no-missing-label-refs -- not a ref -->
+> [!NOTE]
+> Deprecated for now - nothing here that is not already in PharmaScan
+>
+
 To extend the Nuxt base layer, simply add the following to your `nuxt.config.ts`:
 
 ```typescript
