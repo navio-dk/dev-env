@@ -17,7 +17,7 @@ First, add a scoped registry + auth to your project's `.npmrc` (next to `package
 //npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
 ```
 
-- **Local:** export `NODE_AUTH_TOKEN` as a GitHub [personal access token](https://github.com/settings/tokens) with the `read:packages` scope.
+- **Local:** export `NODE_AUTH_TOKEN` as a GitHub [personal access token **(classic)**](https://github.com/settings/tokens/new) with the `read:packages` scope. GitHub Packages does **not** support fine-grained tokens. If `navio-dk` enforces SAML SSO, click **Configure SSO** on the token and authorize it for the org.
 - **CI (GitHub Actions):** set `NODE_AUTH_TOKEN` to `${{ secrets.GITHUB_TOKEN }}` and grant this package "Actions access" to the consuming repo (Package → Settings → Manage Actions access).
 
 Then add the dependency as a development dependency in your `package.json`:
