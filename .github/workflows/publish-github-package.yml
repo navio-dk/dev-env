@@ -7,12 +7,7 @@ on:
   push:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
-  workflow_dispatch: # manual test-run without cutting a release
-    inputs:
-      dry_run:
-        description: "Dry run (pack + auth check, no upload)"
-        type: boolean
-        default: false
+  workflow_dispatch: # manual run to publish the current version (e.g. the first publish of an already-tagged version)
 
 # Don't let two tag pushes (or a tag + a manual dispatch) publish concurrently.
 concurrency:
@@ -57,6 +52,5 @@ jobs:
       # just tarballs the `files` allowlist + package.json + README — it needs
       # neither node_modules nor a resolved lockfile.
       # --ignore-scripts skips the prepare/husky hook (husky isn't installed here anyway).
-      # --dry-run (manual dispatch only) stops before upload so you can verify packaging + auth.
       - name: Publish
-        run: bun publish --ignore-scripts ${{ inputs.dry_run && '--dry-run' || '' }}
+        run: bun publish --ignore-scripts
