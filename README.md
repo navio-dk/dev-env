@@ -2,13 +2,42 @@
 This repo contains shared development environment configurations for projects.
 
 ## Install
-Add this repository as a development dependency in your `package.json`:
+This package is published to **GitHub Packages**. The registry install (below) is recommended — `github:` refs are incompatible with `bun install --frozen-lockfile`. The `github:` method still works and is kept for repos still mid-migration.
 
 <!-- eslint-disable-next-line markdown/no-missing-label-refs -- not a ref -->
 > [!TIP]
 > Jump to the [`package.json` section](#packagejson) for a full `package.json` you can copy + paste.
 
-**Specific tag (recommended)**
+### Registry (recommended)
+First, add a scoped registry + auth to your project's `.npmrc` (next to `package.json`):
+
+```ini
+# .npmrc
+@navio-dk:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
+```
+
+- **Local:** export `NODE_AUTH_TOKEN` as a GitHub [personal access token](https://github.com/settings/tokens) with the `read:packages` scope.
+- **CI (GitHub Actions):** set `NODE_AUTH_TOKEN` to `${{ secrets.GITHUB_TOKEN }}` and grant this package "Actions access" to the consuming repo (Package → Settings → Manage Actions access).
+
+Then add the dependency as a development dependency in your `package.json`:
+
+```json5
+// package.json
+
+{
+	"devDependencies": {
+		"@navio-dk/dev-env": "^{version}"
+	}
+}
+```
+
+### GitHub ref (legacy — being phased out)
+<!-- eslint-disable-next-line markdown/no-missing-label-refs -- not a ref -->
+> [!NOTE]
+> `github:` refs break `bun install --frozen-lockfile`. Prefer the registry install above; these remain for repos still on the old approach.
+
+**Specific tag**
 ```json5
 // package.json
 
@@ -121,7 +150,9 @@ Various parts of the development environment need scripts in your `package.json`
 		"version": "commit-and-tag-version"
 	},
 	"devDependencies": {
-		"@navio-dk/dev-env": "github:navio-dk/dev-env#v{version}"
+		// Registry install (recommended) — requires the scoped .npmrc from the Install section.
+		"@navio-dk/dev-env": "^{version}"
+		// Legacy alternative: "github:navio-dk/dev-env#v{version}"
 	},
 	// If you don't add this, Bun might ask you to trust the package manually because some dependencies run scripts on installation
 	"trustedDependencies": [

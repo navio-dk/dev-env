@@ -2,6 +2,22 @@
   "name": "@navio-dk/dev-env",
   "version": "3.1.2",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/navio-dk/dev-env.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "files": [
+    "commitlint",
+    "eslint",
+    "stylelint",
+    "lint-staged",
+    "tsconfig",
+    "nuxt",
+    "tailwind"
+  ],
   "scripts": {
     "prepare": "husky",
     "lint-staged": "lint-staged",
