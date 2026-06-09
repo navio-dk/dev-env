@@ -1,12 +1,15 @@
 name: Publish to GitHub Packages
 
-# Publish the package to GitHub Packages on semver tags (e.g. v1.2.3).
-# These repos release via `commit-and-tag-version` (the `version` script),
-# which creates a `v`-prefixed git tag — push it with `git push --follow-tags`.
+# Publish to GitHub Packages on semver tags — stable (v1.2.3) and prerelease (v1.2.3-rc.0).
+# Releases are cut with `commit-and-tag-version` (the `version` script), which creates the
+# `v`-prefixed tag; push it with `git push --follow-tags`.
+#   stable     : commit-and-tag-version                  -> vX.Y.Z      (dist-tag: latest)
+#   prerelease : commit-and-tag-version --prerelease rc  -> vX.Y.Z-rc.0 (dist-tag: next)
 on:
   push:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'v[0-9]+.[0-9]+.[0-9]+'        # stable     -> published as `latest`
+      - 'v[0-9]+.[0-9]+.[0-9]+-*'      # prerelease -> published under `next`
 
 jobs:
   publish:
@@ -45,5 +48,12 @@ jobs:
       # just tarballs the `files` allowlist + package.json + README — it needs
       # neither node_modules nor a resolved lockfile.
       # --ignore-scripts skips the prepare/husky hook (husky isn't installed here anyway).
+      # Stable tags publish as `latest`; prerelease tags (vX.Y.Z-rc.0, -beta.1, …) publish
+      # under `next`, so a test release never becomes the version a bare `bun add` resolves to.
       - name: Publish
-        run: bun publish --ignore-scripts
+        run: |
+          if [[ "$GITHUB_REF_NAME" == *-* ]]; then
+            bun publish --ignore-scripts --tag next
+          else
+            bun publish --ignore-scripts
+          fi
