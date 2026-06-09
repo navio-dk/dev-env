@@ -7,12 +7,6 @@ on:
   push:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
-  workflow_dispatch: # manual run to publish the current version (e.g. the first publish of an already-tagged version)
-
-# Don't let two tag pushes (or a tag + a manual dispatch) publish concurrently.
-concurrency:
-  group: publish-${{ github.ref }}
-  cancel-in-progress: false
 
 jobs:
   publish:
@@ -24,10 +18,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
-      # Fail fast if a pushed tag doesn't match package.json, so we never
-      # publish a mislabeled version. Skipped on manual dispatch.
+      # Fail fast if the pushed tag doesn't match package.json, so we never
+      # publish a mislabeled version.
       - name: Verify tag matches package.json version
-        if: github.event_name == 'push'
         run: |
           pkg_version="v$(jq -r .version package.json)"
           if [ "$pkg_version" != "$GITHUB_REF_NAME" ]; then
